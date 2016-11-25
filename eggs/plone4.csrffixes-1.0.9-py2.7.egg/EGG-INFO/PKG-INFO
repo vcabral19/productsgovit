@@ -1,0 +1,177 @@
+Metadata-Version: 1.1
+Name: plone4.csrffixes
+Version: 1.0.9
+Summary: CSRF fixes for Plone 4
+Home-page: http://pypi.python.org/pypi/plone4.csrffixes
+Author: Plone Foundation
+Author-email: plone-developers@lists.sourceforge.net
+License: GPL version 2
+Description: plone4.csrffixes
+        ================
+        
+        The package aims to backport the auto CSRF implementation from Plone 5
+        to Plone 4.
+        
+        The reason this is necessary is because there are a lot of CSRF problem
+        with the ZMI that Zope2 will never be able to fix.
+        
+        See https://plone.org/products/plone/security/advisories/security-vulnerability-20151006-csrf
+        for more details.
+        
+        
+        Installation
+        ============
+        
+        
+        Plone 4.3, 4.2, 4.1 and 4.0
+        ---------------------------
+        
+        add `plone4.csrffixes` to eggs list::
+        
+            eggs =
+                ...
+                plone4.csrffixes
+                ...
+        
+        
+        add a new version pin for plone.protect, plone.keyring and plone.locking::
+        
+            [versions]
+            ...
+            plone.keyring = 3.0.1
+            plone.locking = 2.0.8
+            plone.protect = 3.0.16
+            ...
+        
+        
+        Plone 4.0 and 4.1
+        -----------------
+        
+        If lxml is not already included in your site, this package has a dependency
+        on lxml and will pull it in when installed.
+        
+        We recommend pinning to version 2.3.6 of lxml. If you use a version of lxml > 3,
+        you'll need to also install the ``cssselect`` package. Since version
+        1.0.4 we require ``cssselect`` in our ``setup.py`` so it is
+        automatically installed.
+        
+        
+        
+        Additional addon versions
+        -------------------------
+        
+        To prevent some write on read errors that might cause false
+        positives with the auto csrf protection, these version pins have
+        been reported to work upgrading to::
+        
+            Products.CMFQuickInstallerTool = 3.0.12
+            Products.PlonePAS = 5.0.4
+        
+        
+        
+        
+        Robot framework
+        ---------------
+        
+        plone4.csrffixes registers via z3c.autoinclude for Plone instances and is not
+        loaded in tests.
+        
+        You need to include plone4.csrffixes in your package configure.zcml for it to
+        load in your tests:
+        
+        <include package="plone4.csrffixes" />
+        
+        Changelog
+        =========
+        
+        1.0.9 (2015-11-18)
+        ------------------
+        
+        - fix potential issues with tinymce patch
+          [vangheem]
+        
+        - Add documentation for loading plone4.csrffixes for robot framework testing
+          [lbrannon]
+        
+        
+        1.0.8 (2015-10-30)
+        ------------------
+        
+        - Fix issue where redirects would contain an unparsable response
+          [vangheem]
+        
+        - make plone lock operations safe
+          [vangheem]
+        
+        - Check options before trying to work on them
+          [ale-rt]
+        
+        - Use "application/javascript" media type instead of the obsolete "text/javascript".
+          [hvelarde]
+        
+        
+        1.0.7 (unreleased)
+        ------------------
+        
+        - Skipped by mistake.
+        
+        
+        1.0.6 (2015-10-12)
+        ------------------
+        
+        - add a trailing slash on the site referrer matching
+          [vangheem]
+        
+        
+        1.0.5 (2015-10-08)
+        ------------------
+        
+        - Handle TypeError caused by getToolByName on an
+          invalid context
+          [vangheem]
+        
+        
+        1.0.4 (2015-10-07)
+        ------------------
+        
+        - add cssselect dependency for people who install lxml > 3
+          by mistake on Plone 4.0 and 4.1
+          [vangheem]
+        
+        1.0.3 (2015-10-07)
+        ------------------
+        
+        - prevent TypeError from occurring when checking commit of
+          non-string keys on an OOBTree instance. Fixes #5
+          [vangheem]
+        
+        - Check to see if tinymce ajax is already patched or not.
+          This prevents JavaScript recursion error.
+          [awello, cekk]
+        
+        
+        1.0.2 (2015-10-06)
+        ------------------
+        
+        - use a better guess at if we should rewrite urls
+          for zmi
+          [vangheem]
+        
+        
+        1.0.1 (2015-10-06)
+        ------------------
+        
+        - correctly check for origin header
+          [vangheem]
+        
+        1.0.0 (2015-10-06)
+        ------------------
+        
+        - initial release
+        
+Keywords: plone csrf
+Platform: UNKNOWN
+Classifier: Framework :: Plone
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7

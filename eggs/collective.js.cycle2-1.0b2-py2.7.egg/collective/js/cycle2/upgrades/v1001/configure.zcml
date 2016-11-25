@@ -1,0 +1,20 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="collective.js.cycle2">
+
+  <genericsetup:upgradeSteps
+      source="1000"
+      destination="1001"
+      profile="collective.js.cycle2:default">
+
+    <genericsetup:upgradeStep
+        title="Remove browser layer and JS resource registry registrations"
+        description=""
+        handler=".remove_profile_registrations"
+        />
+
+  </genericsetup:upgradeSteps>
+
+</configure>

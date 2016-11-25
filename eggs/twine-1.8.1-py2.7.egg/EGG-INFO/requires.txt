@@ -1,0 +1,8 @@
+clint
+pkginfo >= 1.0
+requests >= 2.5.0
+requests-toolbelt >= 0.5.1
+setuptools >= 0.7.0
+
+[with-blake2]
+pyblake2

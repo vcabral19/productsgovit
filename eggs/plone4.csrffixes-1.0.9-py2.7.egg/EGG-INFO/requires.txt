@@ -1,0 +1,9 @@
+setuptools
+plone.protect>=3.0.11
+plone.keyring>=3.0.1
+plone.locking>=2.0.8
+collective.monkeypatcher
+cssselect
+
+[test]
+plone.app.testing

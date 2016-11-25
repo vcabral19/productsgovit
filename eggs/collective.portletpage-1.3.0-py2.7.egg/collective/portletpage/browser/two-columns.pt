@@ -1,0 +1,57 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="collective.portletpage">
+<body>
+
+<metal:css fill-slot="style_slot">
+  <style type="text/css" media="all"
+      tal:content="string: @import url(${context/++resource++collective.portletpage.css});"></style>
+</metal:css>
+
+<metal:content-core fill-slot="content-core">
+<metal:block define-macro="content-core">
+
+  <div tal:define="text context/text|nothing"
+       tal:condition="text" metal:use-macro="python:context.widget('text', mode='view')" />
+
+  <div id="portletPageColumns"
+      tal:define="bothColumns python:view.hasColumnFirst() and view.hasColumnSecond()">
+
+    <div class="row">
+    <div id="portletPageTopRow" class="portletPageColumn col-md-12"
+        tal:condition="view/hasColumnTop"
+        tal:content="structure provider:collective.portletpage.toprow"
+        />
+    </div>
+
+    <div class="row">
+    <div id="portletPageFirstColumn" class="portletPageColumn portletPageLeftColumn col-md-6"
+        tal:condition="view/hasColumnFirst"
+        tal:content="structure provider:collective.portletpage.firstcolumn"
+        tal:attributes="class python:bothColumns and 'portletPageColumn portletPageLeftColumn col-md-6' or 'portletPageColumn col-md-12'"
+        />
+
+    <div id="portletPageSecondColumn" class="portletPageColumn portletPageRightColumn col-md-6"
+        tal:condition="view/hasColumnSecond"
+        tal:content="structure provider:collective.portletpage.secondcolumn"
+        tal:attributes="class python:bothColumns and 'portletPageColumn portletPageRightColumn col-md-6' or 'portletPageColumn col-md-12'"
+        />
+    </div>
+
+    <div class="row">
+    <div id="portletPageBottomRow" class="portletPageColumn col-md-12"
+        tal:condition="view/hasColumnBottom"
+        tal:content="structure provider:collective.portletpage.bottomrow"
+        />
+    </div>
+
+  </div>
+
+</metal:block>
+</metal:content-core>
+</body>
+</html>

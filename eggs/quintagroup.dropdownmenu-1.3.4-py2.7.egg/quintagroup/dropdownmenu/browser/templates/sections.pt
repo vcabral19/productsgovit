@@ -1,0 +1,29 @@
+<tal:tabs tal:define="menu view/createMenu"
+          tal:condition="menu"
+          i18n:domain="plone"
+    ><p class="hiddenStructure"
+        i18n:translate="heading_sections"
+        >Navigation</p
+    ><div id="globalnav-wrapper"
+         tal:attributes="class python:view.conf.mobile_menu and 'mobileMenuOn' or nothing"
+        ><input id="globalnav-toggle" type="checkbox" /><div class="globalnav-toggle"
+            ><label for="globalnav-toggle" class="icon-bar"></label
+            ><label for="globalnav-toggle" class="icon-bar"></label
+            ><label for="globalnav-toggle" class="icon-bar"></label
+            ></div
+        ><ul id="portal-globalnav" class="globalnav"
+            ><li tal:replace="structure menu"
+                >DropDown Menu</li
+            ></ul
+        ></div
+    ><div class="mobileMenu"
+          tal:condition="view/conf/mobile_menu"
+        ><select id="portal-globalnav-mobile"
+                 tal:content="structure view/createMenuMobile"
+                 onchange="location = this.options[this.selectedIndex].value;"
+            ><option value="" selected="selected"
+                >Menu</option
+            ></select
+        ></div
+    ></tal:tabs
+>

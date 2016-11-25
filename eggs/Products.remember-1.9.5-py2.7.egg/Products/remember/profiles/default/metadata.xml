@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<metadata>
+  <version>1104</version>
+  <dependencies>
+    <!-- The ATContentTypes profile is needed on Plone 5.
+         But on Plone 4 it has no profile at all, so we cannot add it here. -->
+    <!--dependency>profile-Products.ATContentTypes:base</dependency-->
+    <dependency>profile-Products.membrane:default</dependency>
+  </dependencies>
+</metadata>
